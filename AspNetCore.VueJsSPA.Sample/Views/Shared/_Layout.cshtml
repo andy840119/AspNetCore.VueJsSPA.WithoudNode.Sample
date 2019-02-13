@@ -21,26 +21,23 @@
     <!--Setting vue.js working area-->
     <div id="app" v-cloak>
         <v-app>
-            <router-view>
-                <header>
-                    @await Html.PartialAsync("_Navigation")
-                </header>
+            <header>
+                @await Html.PartialAsync("_Navigation")
+            </header>
+            <div class="container">
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    <router-view></router-view>
+                </main>
+            </div>
+            <footer class="border-top footer text-muted">
                 <div class="container">
-                    <partial name="_CookieConsentPartial" />
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
+                    &copy; 2019 - AspNetCore.VueJsSPA.Sample - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
-
-                <footer class="border-top footer text-muted">
-                    <div class="container">
-                        &copy; 2019 - AspNetCore.VueJsSPA.Sample - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </div>
-                </footer>
-            </router-view>
+            </footer>
         </v-app>
     </div>
-    
+
     <!--Include vue.js library-->
     <script src="./js/site.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -50,6 +47,8 @@
     <script src="https://unpkg.com/http-vue-loader"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vuetify@1.0.17/dist/vuetify.min.js"></script>
+
+    @RenderBody()
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
