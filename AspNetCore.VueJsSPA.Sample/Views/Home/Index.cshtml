@@ -1,8 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Vue Pages and Components here -->
+<script src='./pages/Home.vue.js'></script>
+<script src='./pages/Privacy.Vue.js'></script>
+
+<script>
+    Vue.use(VueRouter);
+    Vue.use(VeeValidate);
+
+    const routes = [{
+            path: '/',
+            component: spaHome
+        },
+        {
+            path: '/home',
+            component: spaHome
+        },
+        {
+            path: '/privacy',
+            component: spaPrivacy
+        }
+    ]
+
+    const router = new VueRouter({
+        routes // short for `routes: routes`
+    })
+
+    var app = new Vue({
+        el: '#app',
+        watch: {},
+        data: {
+            msg: 'Hello'
+        },
+        methods: {},
+        router
+    })
+</script>
