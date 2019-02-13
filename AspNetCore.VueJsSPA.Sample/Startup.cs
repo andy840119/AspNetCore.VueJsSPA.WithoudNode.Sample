@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace AspNetCore.VueJsSPA.Sample
 {
@@ -50,7 +52,37 @@ namespace AspNetCore.VueJsSPA.Sample
             }
 
             app.UseHttpsRedirection();
+
+            // For the wwwroot folder
             app.UseStaticFiles();
+
+            //vue's page
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.WebRootPath, "pages")),
+                RequestPath = "/pages",
+                ServeUnknownFileTypes = true//Need add this for reading unknown file(.vue)
+            });
+
+            //Just add this for debugging
+            //https://localhost:44362/pages
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.WebRootPath, "pages")),
+                RequestPath = "/pages"
+            });
+
+            //vue's component
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.WebRootPath, "components")),
+                RequestPath = "/components",
+                ServeUnknownFileTypes = true
+            });
+
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

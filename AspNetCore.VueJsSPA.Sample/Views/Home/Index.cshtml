@@ -2,25 +2,21 @@
     Layout = "_Layout";
 }
 
-<!-- Vue Pages and Components here -->
-<script src='./pages/Home.vue.js'></script>
-<script src='./pages/Privacy.Vue.js'></script>
-
 <script>
     Vue.use(VueRouter);
     Vue.use(VeeValidate);
 
     const routes = [{
             path: '/',
-            component: spaHome
+            component: httpVueLoader('./pages/Home.vue')
         },
         {
             path: '/home',
-            component: spaHome
+            component: httpVueLoader('./pages/Home.vue')
         },
         {
             path: '/privacy',
-            component: spaPrivacy
+            component: httpVueLoader('./pages/Privacy.vue')
         }
     ]
 
