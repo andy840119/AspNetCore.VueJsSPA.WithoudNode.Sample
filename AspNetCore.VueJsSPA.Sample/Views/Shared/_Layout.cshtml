@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
+    <partial name="_CookieConsentPartial" />
     <!--Setting vue.js working area-->
     <div id="app" v-cloak>
         <v-app>
@@ -25,7 +27,7 @@
                 @await Html.PartialAsync("_Navigation")
             </header>
             <div class="container">
-                <partial name="_CookieConsentPartial" />
+                
                 <main role="main" class="pb-3">
                     <router-view></router-view>
                 </main>
